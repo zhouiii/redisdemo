@@ -1,0 +1,5 @@
+com\redisdemo\controller\UserController.class
+com\redisdemo\dao\UserDao.class
+com\redisdemo\dao\impl\UserDaoImpl.class
+com\redisdemo\model\SysUser.class
+com\redisdemo\service\UserService.class
