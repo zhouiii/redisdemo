@@ -13,11 +13,16 @@
     <!--1、配置映射器与适配器-->
     <mvc:annotation-driven/>
 
+    <mvc:default-servlet-handler/>
+
     <!--2、视图解析器-->
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/template/"/>
         <property name="suffix" value=".jsp"/>
     </bean>
 
-    <context:component-scan base-package="com.redisdemo.controller"/>
+    <context:component-scan base-package="com.redisdemo.*"/>
+
+    <!-- 对静态资源的访问 -->
+    <mvc:resources mapping="/statics/**" location="static" />
 </beans>

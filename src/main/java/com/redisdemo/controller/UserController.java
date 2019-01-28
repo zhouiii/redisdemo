@@ -2,16 +2,15 @@ package com.redisdemo.controller;
 
 
 import com.redisdemo.service.UserService;
+import com.redisdemo.util.RedisDemoUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-/**
- * @ClassName:  UserController
- * @Description:  
- * @author: 周志浩
- * @date: 2019/1/8-15:17
- */
+import javax.annotation.Resource;
+
 @Controller
 public class UserController {
 
@@ -21,6 +20,17 @@ public class UserController {
     @RequestMapping(value = "welcome-web.do")
     public String welcomeWeb(){
         return "pages/index";
+    }
+
+    @RequestMapping(value = "redis-add-test.do", method =  RequestMethod.POST)
+    @ResponseBody
+    public String redisAddTest(String paramtest){
+        System.out.println(paramtest);
+        boolean b = RedisDemoUtil.setString("123", paramtest);
+        System.out.println(b);
+        System.out.println(RedisDemoUtil.getString("123"));
+
+        return RedisDemoUtil.getString("123");
     }
 
 }
