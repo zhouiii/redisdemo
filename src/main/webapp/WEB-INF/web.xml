@@ -15,9 +15,12 @@
         <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
         <async-supported>true</async-supported>
         <init-param>
-            <!-- 生命周期由spring进行托管 -->
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceRequestEncoding</param-name>
+            <param-value>true</param-value>
         </init-param>
     </filter>
     <filter-mapping>

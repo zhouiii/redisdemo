@@ -18,19 +18,36 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping(value = "welcome-web.do")
-    public String welcomeWeb(){
+    public String welcomeWeb() {
         return "pages/index";
     }
 
-    @RequestMapping(value = "redis-add-test.do", method =  RequestMethod.POST)
+    @RequestMapping(value = "redis-add-test.do", method = RequestMethod.POST)
     @ResponseBody
-    public String redisAddTest(String paramtest){
+    public String redisAddTest(String paramtest) {
         System.out.println(paramtest);
         boolean b = RedisDemoUtil.setString("123", paramtest);
         System.out.println(b);
         System.out.println(RedisDemoUtil.getString("123"));
 
         return RedisDemoUtil.getString("123");
+    }
+
+
+    @RequestMapping(value = "redis-del-test.do", method = RequestMethod.POST)
+    @ResponseBody
+    public String redisDelTest(String paramtest) {
+        boolean b = RedisDemoUtil.hasKey(paramtest);
+        if (b) {
+            b = RedisDemoUtil.del(paramtest);
+            if (b) {
+                return "删除成功";
+            } else {
+                return "删除失败";
+            }
+        } else {
+            return "key 不存在";
+        }
     }
 
 }
